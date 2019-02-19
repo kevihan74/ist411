@@ -9,7 +9,7 @@
  * @version 1.0 2/9/19
  */
 
-//package databaseTest;
+package serverdb;
 import java.util.*;
 import java.io.*;
 import java.sql.*;
@@ -71,37 +71,50 @@ public class DatabaseSetup
             
             String tmpString;
             
-            /*
-            * original code tied to the String tmpString
-            * used to create the inital table
-            */
             tmpString = ("CREATE TABLE motherboards" + 
                          "(ProductID int," +
                          "Brand varchar(255), " +
                          "ProdName varchar(255), " +
                          "Price double, " + 
                          "Chip varchar(255), " +
-                         "primary key (price))"); 
+                         "primary key (ProductID))"); 
             
-                        
-            /*
-            tmpString = ("INSERT INTO SALESHISTORY4 (PRODUCTID, PRODNAME, PRICE, TRNSDATE)" +
-                         "VALUES (1235, 'computer', 1000, '1/19/2019')");
-            */
             stmt.execute(tmpString);
             
-            /*
-            System.out.println("Created Sales History table");
+            
+            System.out.println("Created Motherboards Table");
             String[] brand = {"Asus", "Gigabyte", "MSI", "ASRock", "Asus", "MSI", "Gigabyte", "ASRock"};
             String[] prod = {"ASUS ROG DOMINUS EXTREME", "GIGABYTE Z390 AORUS XTREME WATERFORCE LGA 1151 (300 Series)", "MSI MEG Z390 GODLIKE LGA 1151 (300 Series)", "ASRock Z390 Phantom Gaming 9 LGA 1151 (300 Series)", "ASUS ROG Zenith Extreme Alpha X399", "MSI MEG X399 CREATION sTR4", "GIGABYTE X399 AORUS Gaming 7 sTR4", "ASRock X399 Phantom Gaming 6 sTR4"};
-            double[] price = {1,799.99, 899.99, 566.34, 233.99, 649.99, 549.99, 369.99, 249.99};
+            double[] price = {1799.99, 899.99, 566.34, 233.99, 649.99, 549.99, 369.99, 249.99};
             String[] chip = {"Intel", "Intel", "Intel", "AMD", "AMD", "AMD", "AMD", "AMD"};
             for (int i=0;i<brand.length;i++) {
                 tmpString = ("INSERT INTO  MOTHERBOARDS (PRODUCTID, BRAND, PRODNAME, PRICE, CHIP)" +
-                         "VALUES ('" + brand[i] + "', '" + prod[i] + "', " + price[i] + ", '" + chip[i] + "')"); 
+                         "VALUES (" + (1111+i) + ", '" + brand[i] + "', '" + prod[i] + "', " + price[i] + ", '" + chip[i] + "')"); 
                 stmt.execute(tmpString);
-                        }; */
+                        }; 
+            System.out.println("Populated Motherboards table with data");
             
+            tmpString = ("CREATE TABLE processors" + 
+                         "(ChipID int," +
+                         "ChipBrand varchar(255), " +
+                         "ChipName varchar(255), " +
+                         "ChipPrice double, " + 
+                         "ChipCore varchar(255), " +
+                         "primary key (ChipID))"); 
+            
+            stmt.execute(tmpString);
+           
+            System.out.println("Created Processor Table");
+            String[] chipBrand = {"Intel", "AMD", "AMD", "Intel", "AMD", "Intel", "AMD", "Intel"};
+            String[] chipName = {"Intel Core i7-8700K Coffee Lake", "AMD RYZEN 7 2700X", "AMD RYZEN 5 2600X", "Intel Core i7-8700 Coffee Lake", "AMD RYZEN 7 2700", "Intel Core i5-8400 Coffee Lake", "AMD RYZEN 5 2600", "Intel Core i3-8100"};
+            double[] chipPrice = {379.99, 309.99, 199.99, 314.99, 259.99, 199.99, 164.99, 118.99};
+            String[] chipSet = {"6-Core 3.7 GHz", "8-Core 3.7 GHz", "6-Core 3.6 GHz", "6-Core 3.2 GHz", "8-Core 3.2 GHz", "6-Core 2.8 GHz", "6-Core 3.4 GHz", "3.6 GHz LGA 1151"};
+            for (int i=0;i<brand.length;i++) {
+                tmpString = ("INSERT INTO PROCESSORS (CHIPID, CHIPBRAND, CHIPNAME, CHIPPRICE, CHIPCORE)" +
+                         "VALUES (" + (2222+i) + ", '" + chipBrand[i] + "', '" + chipName[i] + "', " + chipPrice[i] + ", '" + chipSet[i] + "')"); 
+                stmt.execute(tmpString);
+                        }; 
+            System.out.println("Populated Processor table with data");
             stmt.close();
         
             con.close();
